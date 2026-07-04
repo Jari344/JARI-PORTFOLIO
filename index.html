@@ -213,6 +213,16 @@
     #banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,20,0.1) 0%, rgba(10,14,20,0.6) 100%); }
     .banner-label { position: absolute; bottom: 20px; left: 22px; z-index: 2; font-family: 'Bungee', sans-serif; font-size: .7rem; color: rgba(255,255,255,0.6); letter-spacing: 3px; text-transform: uppercase; }
 
+    /* ── ABOUT BANNER (second image, same size as #banner) ── */
+    #about-banner {
+      position: relative; z-index: 1; height: 280px; margin: 0 16px 50px; border-radius: 20px;
+      background: url("about-banner.jpg") center/cover no-repeat;
+      border: 1px solid rgba(0,155,163,0.25); overflow: hidden;
+      transition: transform 0.4s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,155,163,0.08);
+    }
+    #about-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,20,0.1) 0%, rgba(10,14,20,0.6) 100%); }
+
     /* ── SECTION HEADING ── */
     .section-head { position: relative; z-index: 1; text-align: center; padding: 0 20px 40px; }
     .section-head .tag { font-size: .6rem; color: var(--teal); letter-spacing: 4px; text-transform: uppercase; border: 1px solid rgba(0,155,163,0.3); padding: 5px 14px; border-radius: 999px; display: inline-block; margin-bottom: 12px; }
@@ -608,15 +618,22 @@
       body { cursor: auto; }
       #cursor, #cursor-ring { display: none; }
 
-      #hero { padding: 90px 16px 50px; }
-      .stats-row { gap: 14px; }
+      #hero { padding: 84px 16px 44px; }
+      .hero-sub { font-size: .72rem; }
+      .stats-row { gap: 10px 16px; margin-top: 22px; }
       .stat-divider { display: none; }
+      .stat-num { font-size: 1.6rem; }
+      .stat-label { font-size: .5rem; letter-spacing: 1.5px; }
+      .langs { margin-top: 22px; gap: 6px; }
+      .scroll-hint { margin-top: 36px; }
 
-      #banner { height: 200px; margin: 0 12px 40px; border-radius: 16px; transform: none !important; }
+      #banner, #about-banner { height: 200px; margin: 0 12px 40px; border-radius: 16px; transform: none !important; }
 
       #cards { grid-template-columns: 1fr; padding: 0 12px 50px; gap: 14px; }
       .info-card { padding: 22px 18px; }
       .info-card h2 { font-size: 1.2rem; }
+      .info-card p { font-size: .7rem; line-height: 1.8; }
+      .contact-val { word-break: break-word; }
 
       .socials-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
       .social-card { flex-direction: row; padding: 20px 22px; gap: 18px; border-radius: 16px; }
@@ -627,11 +644,15 @@
       .social-handle { text-align: left; font-size: .6rem; }
 
       #projects { padding: 16px 12px 60px; }
-      .projects-grid { grid-template-columns: 1fr; }
+      .ps-subtitle { margin-bottom: 24px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 16px; }
       .proj-card.featured { grid-column: span 1; display: block; }
       .proj-card.featured .pc-preview { height: 180px; }
-      .filter-bar { gap: 6px; }
+      .filter-bar { gap: 6px; margin-bottom: 24px; }
       .filter-btn { font-size: 9px; padding: 6px 10px; }
+      .pc-body { padding: 16px 16px 14px; }
+      .pc-desc { font-size: 10.5px; margin-bottom: 12px; }
+      .pc-footer { padding: 10px 16px; }
 
       #modal-overlay { align-items: flex-end; }
     }
@@ -640,7 +661,7 @@
     @media (min-width: 601px) and (max-width: 900px) {
       .socials-grid { grid-template-columns: repeat(3, 1fr); }
       #cards { grid-template-columns: 1fr 1fr; }
-      #banner { height: 360px; transform: none; }
+      #banner, #about-banner { height: 360px; transform: none; }
       .proj-card.featured { grid-column: span 2; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -654,8 +675,8 @@
       nav { top: 18px; padding: 10px 24px; }
       .logo { font-size: 1.1rem; }
       .nav-links a { font-size: .75rem; padding: 6px 16px; }
-      #banner { height: 550px; margin: 0 24px 60px; transform: perspective(1000px) rotateX(3deg); }
-      #banner:hover { transform: perspective(1000px) rotateX(0deg) scale(1.01); }
+      #banner, #about-banner { height: 550px; margin: 0 24px 60px; transform: perspective(1000px) rotateX(3deg); }
+      #banner:hover, #about-banner:hover { transform: perspective(1000px) rotateX(0deg) scale(1.01); }
       #cards { padding: 0 24px 70px; gap: 24px; }
       #socials { padding: 20px 40px 80px; }
       #projects { padding: 20px 40px 100px; }
@@ -663,7 +684,7 @@
 
     /* Large desktop */
     @media (min-width: 1200px) {
-      #banner { height: 880px; }
+      #banner, #about-banner { height: 880px; }
     }
 
     /* Touch devices — disable 3D hover effects */
@@ -735,6 +756,11 @@
     <div class="banner-label">Building the future, one line at a time</div>
   </div>
 
+  <!-- ABOUT BANNER (add your own image at about-banner.jpg) -->
+  <div id="about-banner" class="reveal">
+    <div class="banner-label">A little about me</div>
+  </div>
+
   <!-- INFO CARDS -->
   <section id="cards">
     <div class="info-card reveal" id="about">
@@ -763,7 +789,7 @@
           <div><div class="contact-label">Phone</div><div class="contact-val">+91 79749 23954</div></div>
         </div>
         <div class="contact-row" data-copy="Jari786abbasrizvi@gmail.com">
-          <div class="contact-icon">✉️</div>
+          <div class="contact-icon">️</div>
           <div><div class="contact-label">Email</div><div class="contact-val">Jari786abbasrizvi@gmail.com</div></div>
         </div>
       </div>
@@ -1002,9 +1028,10 @@
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
   camera.position.z = 18;
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  const isMobile = window.innerWidth < 600;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isMobile });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5));
   renderer.setClearColor(0x000000, 0);
 
   const matTeal = new THREE.MeshBasicMaterial({ color: 0x009BA3, wireframe: true, transparent: true, opacity: 0.15 });
@@ -1019,7 +1046,7 @@
   ];
   const mats = [matTeal, matGlow, matAccent];
   const meshes = [];
-  const count = window.innerWidth < 600 ? 14 : 24;
+  const count = isMobile ? 8 : 24;
   for (let i = 0; i < count; i++) {
     const geo = geoTypes[Math.floor(Math.random() * geoTypes.length)]();
     const mat = mats[Math.floor(Math.random() * mats.length)].clone();
@@ -1032,19 +1059,35 @@
     scene.add(mesh); meshes.push(mesh);
   }
   const ptGeo = new THREE.BufferGeometry();
-  const ptCount = window.innerWidth < 600 ? 80 : 160;
+  const ptCount = isMobile ? 40 : 160;
   const positions = new Float32Array(ptCount*3);
   for (let i=0;i<ptCount*3;i++) positions[i]=(Math.random()-.5)*60;
   ptGeo.setAttribute('position',new THREE.BufferAttribute(positions,3));
   scene.add(new THREE.Points(ptGeo,new THREE.PointsMaterial({color:0x009BA3,size:.06,transparent:true,opacity:.4})));
   let targetCamX=0,targetCamY=0;
-  window.addEventListener('mousemove',e=>{
-    targetCamX=(e.clientX/window.innerWidth-.5)*2*1.5;
-    targetCamY=-(e.clientY/window.innerHeight-.5)*2*1.0;
-  });
+  if (window.matchMedia('(hover: hover)').matches) {
+    window.addEventListener('mousemove',e=>{
+      targetCamX=(e.clientX/window.innerWidth-.5)*2*1.5;
+      targetCamY=-(e.clientY/window.innerHeight-.5)*2*1.0;
+    });
+  }
   window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
   const clock=new THREE.Clock();
-  (function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();camera.position.x+=(targetCamX-camera.position.x)*.04;camera.position.y+=(targetCamY-camera.position.y)*.04;camera.lookAt(scene.position);meshes.forEach(m=>{m.rotation.x+=m.userData.rx;m.rotation.y+=m.userData.ry;m.rotation.z+=m.userData.rz;m.position.y+=Math.sin(t*m.userData.floatSpd+m.userData.floatOff)*.002;});renderer.render(scene,camera);})();
+  let rafId=null, sceneRunning=true;
+  function animate(){
+    rafId=requestAnimationFrame(animate);
+    const t=clock.getElapsedTime();
+    camera.position.x+=(targetCamX-camera.position.x)*.04;
+    camera.position.y+=(targetCamY-camera.position.y)*.04;
+    camera.lookAt(scene.position);
+    meshes.forEach(m=>{m.rotation.x+=m.userData.rx;m.rotation.y+=m.userData.ry;m.rotation.z+=m.userData.rz;m.position.y+=Math.sin(t*m.userData.floatSpd+m.userData.floatOff)*.002;});
+    renderer.render(scene,camera);
+  }
+  animate();
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden && sceneRunning){cancelAnimationFrame(rafId);sceneRunning=false;}
+    else if(!document.hidden && !sceneRunning){sceneRunning=true;animate();}
+  });
 })();
 
 /* ── CURSOR (desktop only) ── */
@@ -1082,7 +1125,15 @@ function startMatrixRain(canvas,speed){
 }
 const previewCanvas=document.getElementById('matrix-canvas-preview');
 let previewRain=null;
-new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!previewRain){previewRain=startMatrixRain(previewCanvas,1.2);}});},{threshold:.1}).observe(previewCanvas);
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      if(!previewRain){previewRain=startMatrixRain(previewCanvas,1.2);}
+    } else if(previewRain){
+      previewRain.stop();previewRain=null;
+    }
+  });
+},{threshold:.1}).observe(previewCanvas);
 window.addEventListener('resize',()=>{if(previewRain)previewRain.resize();});
 
 /* ── TYPEWRITER ── */
