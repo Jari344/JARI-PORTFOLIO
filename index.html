@@ -113,7 +113,7 @@ main,header,footer,section{position:relative}
 .track{display:flex;width:max-content;animation:mq 34s linear infinite}
 .marq.js .track{animation:none}
 .track span{display:inline-flex;align-items:center;gap:clamp(20px,3vw,44px);margin-right:clamp(20px,3vw,44px);font:800 clamp(2.4rem,7vw,6rem)/1 var(--display);font-stretch:80%;letter-spacing:-.03em;text-transform:uppercase;white-space:nowrap}
-.track span::after{content:"✺";font-size:.5em}
+.track span::after{content:"";flex:none;width:.2em;height:.2em;border-radius:50%;background:var(--bk)}
 .track span:nth-child(even){color:transparent;-webkit-text-stroke:1.5px var(--bk)}
 @keyframes mq{to{transform:translateX(-50%)}}
 /* about */
@@ -136,7 +136,7 @@ main,header,footer,section{position:relative}
 /* manifesto */
 .mf{height:100svh;min-height:560px;background:var(--bk);overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:80px var(--pad) 40px}
 .mf-ring{position:absolute;right:-18vmax;top:50%;width:70vmax;height:70vmax;margin-top:-35vmax;pointer-events:none;overflow:visible}
-.mf-ring circle{fill:none;stroke:var(--lime);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.mf-ring circle{fill:none;stroke:var(--lime);stroke-width:.18}
 .mf .eyebrow{position:absolute;left:var(--pad);top:calc(env(safe-area-inset-top,0px) + 84px)}
 .mf-h{position:relative;font:800 min(16vw,26svh)/.84 var(--display);font-stretch:80%;letter-spacing:-.05em;text-transform:uppercase;transform-origin:0 50%}
 .mf-w{display:block;overflow:hidden;padding:.06em 0 .02em}
@@ -171,7 +171,7 @@ main,header,footer,section{position:relative}
 .card{position:relative;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(14px,2vw,28px);margin-bottom:clamp(40px,6vw,80px)}
 .art{position:relative;overflow:hidden;border-radius:26px;min-height:clamp(340px,40vw,560px);background:var(--c2);isolation:isolate}
 .art-in{position:absolute;inset:-2%;display:grid;place-items:center;will-change:transform}
-.art-in .g{font-size:clamp(7rem,18vw,15rem);line-height:1;filter:drop-shadow(0 22px 34px rgba(0,0,0,.45))}
+.art-in .g{font:800 clamp(9rem,26vw,20rem)/.8 var(--display);font-stretch:80%;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px rgba(242,239,232,.45);margin-top:-8%}
 .art-in canvas,.art-in img{position:absolute;inset:0;width:100%;height:100%}.art-in img{object-fit:cover}
 .art::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(11,11,10,.78),transparent 58%)}
 .art::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.5;background:linear-gradient(90deg,rgba(242,239,232,.06) 1px,transparent 1px) 0 0/72px 100%}
@@ -226,6 +226,22 @@ footer{background:var(--bk);padding:clamp(40px,6vw,80px) 0 28px;overflow:hidden}
 .ft a:hover{color:var(--lime)}
 #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 26px);transform:translate(-50%,90px);background:var(--bk);color:var(--lime);border:1px solid var(--lime);padding:11px 22px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:350;opacity:0;transition:.4s cubic-bezier(.3,1.4,.5,1);max-width:90vw;text-align:center}
 #toast.show{transform:translate(-50%,0);opacity:1}
+/* 3D canvases, hand-drawn bits */
+.gl3d{object-fit:cover}
+.d3 .art-in .g{display:none}
+.mf-3d{position:absolute;right:-2vw;top:50%;width:min(56vw,74svh);height:min(56vw,74svh);transform:translateY(-50%);pointer-events:none}
+.mf-3d canvas{width:100%;height:100%;display:block}
+.ar{width:1em;height:1em;display:block}
+.btn i{display:inline-flex}
+.tagwrap{display:block}
+.sq{display:block;width:clamp(130px,15vw,200px);height:14px;margin-top:4px;overflow:visible}
+.sq path,.scrib path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sq path{stroke:var(--lime);stroke-width:3}
+.badge{rotate:-9deg}
+.big{position:relative}
+.scrib{position:absolute;left:-2%;bottom:-4%;width:64%;height:38%;overflow:visible;pointer-events:none}
+.scrib path{stroke:var(--bk);stroke-width:3}
+@media (max-width:899px){.mf-3d{opacity:.5}}
 /* cursor */
 .cur{position:fixed;left:0;top:0;z-index:400;pointer-events:none;opacity:0;transition:opacity .3s}
 .cur.on{opacity:1}
@@ -265,7 +281,7 @@ html{scroll-behavior:auto}
 <div id="bar" aria-hidden="true"></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <div class="cur" id="cur" aria-hidden="true"><i></i><span></span></div>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="dst" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".012 .02" numOctaves="1" seed="3" result="n"/><feDisplacementMap id="dm" in="SourceGraphic" in2="n" scale="0"/></filter></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="ar" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol><filter id="dst" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".012 .02" numOctaves="1" seed="3" result="n"/><feDisplacementMap id="dm" in="SourceGraphic" in2="n" scale="0"/></filter></svg>
 
 <div id="intro" role="presentation">
   <div class="i-top"><span>GPJ Codes</span><button id="skip" type="button">Skip intro</button></div>
@@ -299,7 +315,7 @@ html{scroll-behavior:auto}
   </div>
   <div class="hero-inner">
     <div class="hero-top up">
-      <p class="tag">Creative digital studio</p>
+      <div class="tagwrap"><p class="tag">Creative digital studio</p><svg class="sq" viewBox="0 0 190 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 9C22 3 38 12 60 6S98 11 120 5s42 6 68 1"/></svg></div>
       <p class="avail" role="status"><span class="dot" aria-hidden="true"></span>Available for freelance projects</p>
     </div>
     <h1 class="hero-title" id="h1" aria-label="GPJ Codes, creative digital studio by Jari Abbas Rizvi">
@@ -314,7 +330,7 @@ html{scroll-behavior:auto}
       </div>
       <div class="stats" id="stats"></div>
       <div class="ctas">
-        <a class="btn p mag" href="#work">Explore My Work <i aria-hidden="true">↗</i></a>
+        <a class="btn p mag" href="#work">Explore My Work <i aria-hidden="true"><svg class="ar"><use href="#ar"/></svg></i></a>
         <a class="btn mag" href="#contact">Contact Me</a>
       </div>
     </div>
@@ -354,6 +370,7 @@ html{scroll-behavior:auto}
 
 <section id="manifesto" class="mf" aria-label="Approach">
   <svg class="mf-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="dr" pathLength="1" cx="50" cy="50" r="49"/></svg>
+  <div class="mf-3d" aria-hidden="true"><canvas class="gl3d" data-scene="knot"></canvas></div>
   <p class="eyebrow">(02) Approach</p>
   <h2 class="mf-h" aria-label="Design. Code. Motion.">
     <span class="mf-w" aria-hidden="true"><span>Design</span></span>
@@ -367,7 +384,7 @@ html{scroll-behavior:auto}
   <span id="skills"></span>
   <div class="wrap">
     <p class="eyebrow">(03) Services</p>
-    <div class="sec-h"><h2 id="services-h">What I<br>can build</h2><p>The languages I build with are in the marquee above. This is what I can build for you.</p></div>
+    <div class="sec-h"><h2 id="services-h">What I<br>can build</h2><p>The marquee up there is what I write in. This is what I can make with it.</p></div>
     <ul class="sv-list">
       <li class="sv" data-cursor=""><span class="n">01</span><h3>Web Design</h3><p>Layouts, type and visual identity, from first sketch to finished page.</p>
         <svg viewBox="0 0 64 64" aria-hidden="true"><path class="dr" pathLength="1" d="M8 14h48v36H8z"/><path class="dr" pathLength="1" d="M8 24h48"/><path class="dr" pathLength="1" d="M34 34l10 4-4 3 4 5-3 2-4-5-3 4z"/></svg></li>
@@ -389,7 +406,7 @@ html{scroll-behavior:auto}
       <div><p class="eyebrow">(04) Selected projects</p><h2 id="work-h">Selected<br>work</h2></div>
       <div class="w-meta">
         <p>Side experiments and bigger builds, from storefronts to developer tools.</p>
-        <p class="key">Status key: Live = verified working URL · Built = built, no live URL yet · Concept = practice or idea · In progress · Archived.</p>
+        <p class="key">Live means the link really works. Built means it exists but isn’t online yet. Concept is a practice run or an idea.</p>
         <div class="prog" aria-hidden="true"><span id="cnt">01</span><i><b id="prog"></b></i><span id="tot">10</span></div>
       </div>
     </div>
@@ -405,12 +422,13 @@ html{scroll-behavior:auto}
       <span class="mask"><span class="ln" aria-hidden="true">Let’s create</span></span>
       <span class="mask"><span class="ln" aria-hidden="true">something</span></span>
       <span class="mask"><span class="ln o" aria-hidden="true">different.</span></span>
+      <svg class="scrib" viewBox="0 0 500 120" preserveAspectRatio="none" aria-hidden="true"><path class="dr" pathLength="1" d="M20 70C10 30 120 8 260 10S490 25 482 62C474 104 330 114 190 108S8 100 22 62"/></svg>
     </h2>
     <div class="ct-grid">
       <div id="mail"></div>
       <a class="orbtn mag" id="cta" href="#contact" aria-label="Open in mail app" data-cursor="Email">
         <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="op" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/></defs><text font-size="11" font-weight="700" fill="currentColor" font-family="Instrument Sans,sans-serif"><textPath href="#op" textLength="290" lengthAdjust="spacing">LET’S TALK • LET’S TALK • LET’S TALK • </textPath></text></svg>
-        <span aria-hidden="true">↗</span>
+        <span aria-hidden="true"><svg class="ar"><use href="#ar"/></svg></span>
       </a>
       <div class="rows">
         <a class="row" href="https://www.instagram.com/jari786abbas" target="_blank" rel="noopener"><b>Instagram</b><span>@jari_abbas.dev<span class="sr"> (opens in new tab)</span></span></a>
@@ -425,7 +443,7 @@ html{scroll-behavior:auto}
 <footer>
   <div class="wrap">
     <p class="wm" aria-hidden="true">GPJ Codes</p>
-    <div class="ft"><span>Designed and built by Jari Abbas Rizvi</span><a href="#hero">Back to top ↑</a><span>© <span id="yr"></span> GPJ Codes</span></div>
+    <div class="ft"><span>Designed and built by Jari Abbas Rizvi</span><a href="#hero">Back to top</a><span>© <span id="yr"></span> GPJ Codes</span></div>
   </div>
 </footer>
 
@@ -448,16 +466,16 @@ const langs=['HTML','CSS','JavaScript','Python','Java','C++','C#','C','Rust'];
    v:1 marks a live URL you have personally checked. Set it (and s:'live') only after verifying. */
 const L={live:'Live',built:'Built · no live URL yet',concept:'Concept',wip:'In progress',arch:'Archived'};
 const P=[
- {t:'Shadow Resets — Manga Hub',s:'built',k:'Web / Editorial',v:0,g:'⏳',c1:'#0d0d1a',c2:'linear-gradient(135deg,#180828,#2a0810)',d:'An interactive web portal for the original sci-fi mystery manga series Shadow Resets, featuring volume readers, world-building lore, character profiles, and an arc timeline.',pr:'Gives readers a cinematic, atmospheric hub to read volumes and explore the Neo City storyline.',tags:['HTML','CSS','JavaScript','SVG','UI/UX'],live:'https://drive.google.com/file/d/1I0KeWzWPBMYyWlDnECcDZCD4R3tMwVfo/view?usp=drivesdk',src:'https://github.com/Jari344',img:''},
- {t:'L’Artisan — 3D Fine Dining',s:'built',k:'3D / WebGL',v:0,g:'🍔',c1:'#121009',c2:'linear-gradient(135deg,#2a1f10,#0b0a08)',d:'A luxury culinary showcase with a photorealistic 3D burger model rendered in Three.js, synchronized to smooth scroll-driven animations using GSAP ScrollTrigger.',pr:'Brings high-end restaurant storytelling to life with interactive WebGL 3D visuals.',tags:['Three.js','GSAP','ScrollTrigger','WebGL','GLTF'],live:'',src:'https://github.com/Jari344',img:''},
- {t:'Atomic Explorer — 118 Elements',s:'built',k:'Data visualisation',v:0,g:'⚛',c1:'#020510',c2:'linear-gradient(135deg,#051d33,#020510)',d:'An interactive periodic table and real-time Bohr model visualizer for all 118 elements, featuring animated electron shells, orbit speed controls, category filters, and instant search.',pr:'Makes learning atomic structure and element properties visual, interactive, and fast.',tags:['JavaScript','Canvas API','Chemistry','Data Viz'],live:'',src:'https://github.com/Jari344',img:''},
- {t:'Eid ul Adha Family Greeting',s:'built',k:'3D / Interactive',v:0,g:'🌙',c1:'#050a08',c2:'linear-gradient(135deg,#0a2e1f,#050a08)',d:'A festive interactive family greeting web app featuring a Three.js golden starfield, GSAP hero reveals, 3D flip cards for family wishes, ambient audio, and a confetti gift modal.',pr:'Turns a traditional holiday greeting into a memorable, personalized 3D web experience.',tags:['Three.js','GSAP','AOS','Canvas Confetti','CSS 3D'],live:'',src:'https://github.com/Jari344',img:''},
- {t:'Nike Store Clone',s:'concept',k:'E-commerce practice',v:0,g:'👟',c1:'#0b2b33',c2:'linear-gradient(135deg,#123a4a,#0a1f2e)',d:'A storefront with a responsive three-column product grid, full-bleed hero and add-to-cart, in plain HTML, CSS and JavaScript.',pr:'Practice building a responsive shop layout without a framework.',tags:['HTML','CSS','JavaScript','E-commerce'],live:'',src:'',img:''},
+ {t:'Shadow Resets — Manga Hub',s:'built',k:'Web / Editorial',v:0,o:'hourglass',c1:'#0d0d1a',c2:'linear-gradient(135deg,#180828,#2a0810)',d:'An interactive web portal for the original sci-fi mystery manga series Shadow Resets, featuring volume readers, world-building lore, character profiles, and an arc timeline.',pr:'Gives readers a cinematic, atmospheric hub to read volumes and explore the Neo City storyline.',tags:['HTML','CSS','JavaScript','SVG','UI/UX'],live:'https://drive.google.com/file/d/1I0KeWzWPBMYyWlDnECcDZCD4R3tMwVfo/view?usp=drivesdk',src:'https://github.com/Jari344',img:''},
+ {t:'L’Artisan — 3D Fine Dining',s:'built',k:'3D / WebGL',v:0,o:'burger',c1:'#121009',c2:'linear-gradient(135deg,#2a1f10,#0b0a08)',d:'A luxury culinary showcase with a photorealistic 3D burger model rendered in Three.js, synchronized to smooth scroll-driven animations using GSAP ScrollTrigger.',pr:'Brings high-end restaurant storytelling to life with interactive WebGL 3D visuals.',tags:['Three.js','GSAP','ScrollTrigger','WebGL','GLTF'],live:'',src:'https://github.com/Jari344',img:''},
+ {t:'Atomic Explorer — 118 Elements',s:'built',k:'Data visualisation',v:0,o:'atom',c1:'#020510',c2:'linear-gradient(135deg,#051d33,#020510)',d:'An interactive periodic table and real-time Bohr model visualizer for all 118 elements, featuring animated electron shells, orbit speed controls, category filters, and instant search.',pr:'Makes learning atomic structure and element properties visual, interactive, and fast.',tags:['JavaScript','Canvas API','Chemistry','Data Viz'],live:'',src:'https://github.com/Jari344',img:''},
+ {t:'Eid ul Adha Family Greeting',s:'built',k:'3D / Interactive',v:0,o:'crescent',c1:'#050a08',c2:'linear-gradient(135deg,#0a2e1f,#050a08)',d:'A festive interactive family greeting web app featuring a Three.js golden starfield, GSAP hero reveals, 3D flip cards for family wishes, ambient audio, and a confetti gift modal.',pr:'Turns a traditional holiday greeting into a memorable, personalized 3D web experience.',tags:['Three.js','GSAP','AOS','Canvas Confetti','CSS 3D'],live:'',src:'https://github.com/Jari344',img:''},
+ {t:'Nike Store Clone',s:'concept',k:'E-commerce practice',v:0,o:'shoebox',c1:'#0b2b33',c2:'linear-gradient(135deg,#123a4a,#0a1f2e)',d:'A storefront with a responsive three-column product grid, full-bleed hero and add-to-cart, in plain HTML, CSS and JavaScript.',pr:'Practice building a responsive shop layout without a framework.',tags:['HTML','CSS','JavaScript','E-commerce'],live:'',src:'',img:''},
  {t:'Matrix Rain',s:'built',k:'Creative coding',v:0,g:'canvas',c1:'#06190f',c2:'#000',d:'Real-time digital rain on an HTML5 canvas with randomised character fall. The animation in this card is the project itself.',pr:'Shows smooth canvas animation with no libraries.',tags:['JavaScript','Canvas API','Visual art'],live:'',src:'',img:''},
- {t:'Parallax Portfolio Engine',s:'concept',k:'Motion / Library',v:0,g:'✦',c1:'#1d1534',c2:'linear-gradient(135deg,#2c1f52,#150e2b)',d:'A scroll-driven animation engine for cinematic portfolio pages, written in vanilla JavaScript.',pr:'Gives long pages depth without heavy animation libraries.',tags:['HTML','CSS','JavaScript'],live:'',src:'',img:''},
- {t:'NexAPI Gateway',s:'wip',k:'Backend',v:0,g:'⬡',c1:'#0a2a1c',c2:'linear-gradient(135deg,#0f3f2a,#082015)',d:'A lightweight API gateway with JWT auth, rate limiting, request logging and a live admin panel.',pr:'Gives small projects one secure entry point for auth and limits.',tags:['Express','Redis','JWT'],live:'',src:'',img:''},
- {t:'DevSync CLI',s:'concept',k:'Developer tool',v:0,g:'⚙',c1:'#2b1c06',c2:'linear-gradient(135deg,#4a2f0a,#241503)',d:'A terminal tool that syncs dev environments across machines with encrypted config snapshots and Git hooks.',pr:'Keeps your setup the same on every machine.',tags:['Node.js','Shell','AES-256'],live:'',src:'',img:''},
- {t:'Vaultex E-commerce',s:'arch',k:'E-commerce',v:0,g:'◈',c1:'#1a1a22',c2:'linear-gradient(135deg,#2a2a38,#14141b)',d:'A headless storefront with Stripe payments, inventory management and a custom CMS.',pr:'Lets a small shop sell online without a locked-in platform.',tags:['Next.js','Stripe','MongoDB'],live:'',src:'https://github.com/Jari344',img:''}
+ {t:'Parallax Portfolio Engine',s:'concept',k:'Motion / Library',v:0,o:'layers',c1:'#1d1534',c2:'linear-gradient(135deg,#2c1f52,#150e2b)',d:'A scroll-driven animation engine for cinematic portfolio pages, written in vanilla JavaScript.',pr:'Gives long pages depth without heavy animation libraries.',tags:['HTML','CSS','JavaScript'],live:'',src:'',img:''},
+ {t:'NexAPI Gateway',s:'wip',k:'Backend',v:0,o:'hexgate',c1:'#0a2a1c',c2:'linear-gradient(135deg,#0f3f2a,#082015)',d:'A lightweight API gateway with JWT auth, rate limiting, request logging and a live admin panel.',pr:'Gives small projects one secure entry point for auth and limits.',tags:['Express','Redis','JWT'],live:'',src:'',img:''},
+ {t:'DevSync CLI',s:'concept',k:'Developer tool',v:0,o:'gears',c1:'#2b1c06',c2:'linear-gradient(135deg,#4a2f0a,#241503)',d:'A terminal tool that syncs dev environments across machines with encrypted config snapshots and Git hooks.',pr:'Keeps your setup the same on every machine.',tags:['Node.js','Shell','AES-256'],live:'',src:'',img:''},
+ {t:'Vaultex E-commerce',s:'arch',k:'E-commerce',v:0,o:'vault',c1:'#1a1a22',c2:'linear-gradient(135deg,#2a2a38,#14141b)',d:'A headless storefront with Stripe payments, inventory management and a custom CMS.',pr:'Lets a small shop sell online without a locked-in platform.',tags:['Next.js','Stripe','MongoDB'],live:'',src:'https://github.com/Jari344',img:''}
 ];
 
 /* ---------- content ---------- */
@@ -471,7 +489,7 @@ const btn=(u,l,c)=>u?`<a class="go ${c} mag" href="${u}" target="_blank" rel="no
 const sp=t=>{const i=t.indexOf(' — ');return i<0?[t,'']:[t.slice(0,i),t.slice(i+3)]};
 $('#cards').innerHTML=P.map((p,i)=>{const [a,b]=sp(p.t),n=String(i+1).padStart(2,'0');
 return `<article class="card" style="--c1:${p.c1};--c2:${p.c2}" aria-labelledby="p${i}">
-<div class="art" data-cursor="Scroll"><div class="art-in">${p.g==='canvas'?'<canvas id="mx" aria-hidden="true"></canvas>':`<div class="g" aria-hidden="true">${p.g}</div>`}${p.img?`<img src="${p.img}" alt="Preview of ${p.t}" width="640" height="400" loading="lazy" decoding="async">`:''}</div>
+<div class="art" data-cursor="Scroll"><div class="art-in">${p.g==='canvas'?'<canvas id="mx" aria-hidden="true"></canvas>':`<canvas class="gl3d" data-scene="${p.o}" aria-hidden="true"></canvas><div class="g" aria-hidden="true">${a.charAt(0)}</div>`}${p.img?`<img src="${p.img}" alt="Preview of ${p.t}" width="640" height="400" loading="lazy" decoding="async">`:''}</div>
 <span class="num" aria-hidden="true">${n}</span><span class="st ${p.s}">${L[p.s]}</span>
 <div class="ttl"><h3 id="p${i}"><span class="t1">${a}</span>${b?` <span class="t2">${b}</span>`:''}</h3></div></div>
 <div class="meta"><p class="cat">${p.k}</p><p class="d">${p.d}</p><p class="pb"><strong>Problem it solves:</strong> ${p.pr}</p>
@@ -571,10 +589,110 @@ function initGL(){
    S.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)o.material.dispose()});R.dispose()});
  }catch(e){root.classList.remove('gl')}
 }
+/* ---------- 3D objects: one shared renderer paints every card canvas ---------- */
+const mat=(c,o)=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.5,metalness:.05,flatShading:true},o));
+const mesh=(g,m)=>new THREE.Mesh(g,m);
+const edge=(geo,c,op)=>new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:c||0xf2efe8,transparent:true,opacity:op==null?.5:op}));
+const wire=(m,c,op)=>{const e=edge(m.geometry,c,op);e.position.copy(m.position);e.rotation.copy(m.rotation);e.scale.copy(m.scale);return e};
+const spin=(g,x0,sp)=>(t,it)=>{g.rotation.y=t*(sp||.45)+it.mx*2.2;g.rotation.x=(x0==null?.3:x0)+it.my*1.4;g.position.y=.55+Math.sin(t*1.1)*.1};
+const sway=g=>(t,it)=>{g.rotation.y=Math.sin(t*.6)*.7+it.mx*1.8;g.rotation.x=it.my*1.2;g.position.y=.55+Math.sin(t*1.1)*.1};
+const B={
+ hourglass(){const g=new THREE.Group(),gl=mat(0xf2efe8,{transparent:true,opacity:.3,roughness:.2});
+  const a=mesh(new THREE.ConeGeometry(1.15,1.7,10),gl);a.rotation.x=Math.PI;a.position.y=.85;
+  const b=mesh(new THREE.ConeGeometry(1.15,1.7,10),gl);b.position.y=-.85;
+  const sand=mesh(new THREE.ConeGeometry(.85,1.1,10),mat(0xc6ff3d));sand.position.y=-1.15;
+  const c1=mesh(new THREE.CylinderGeometry(1.3,1.3,.14,24),mat(0xc6ff3d)),c2=mesh(new THREE.CylinderGeometry(1.3,1.3,.14,24),mat(0xc6ff3d));c1.position.y=1.78;c2.position.y=-1.78;
+  g.add(a,b,sand,c1,c2,wire(a),wire(b));return{g,tick:spin(g,.25,.5)}},
+ burger(){const g=new THREE.Group(),tan=0xd9a35c;
+  const top=mesh(new THREE.SphereGeometry(1.35,24,12,0,Math.PI*2,0,Math.PI/2),mat(tan));top.scale.y=.75;top.position.y=.55;g.add(top);
+  const seed=mat(0xfff3d6);
+  for(let i=0;i<16;i++){const q=mesh(new THREE.SphereGeometry(.055,6,6),seed),th=.15+Math.random()*.95,ph=Math.random()*6.283;
+   q.position.set(1.37*Math.sin(th)*Math.cos(ph),.55+1.37*.75*Math.cos(th),1.37*Math.sin(th)*Math.sin(ph));g.add(q)}
+  const lettuce=mesh(new THREE.TorusGeometry(1.28,.15,8,28),mat(0x8ed62a));lettuce.rotation.x=Math.PI/2;lettuce.position.y=.2;
+  const cheese=mesh(new THREE.BoxGeometry(2.5,.07,2.5),mat(0xf4c542));cheese.position.y=.02;cheese.rotation.y=.78;
+  const patty=mesh(new THREE.CylinderGeometry(1.3,1.3,.38,28),mat(0x4a2a1a));patty.position.y=-.24;
+  const bun=mesh(new THREE.CylinderGeometry(1.3,1.15,.34,28),mat(tan));bun.position.y=-.62;
+  g.add(lettuce,cheese,patty,bun);return{g,tick:spin(g,.4,.4)}},
+ atom(){const g=new THREE.Group(),nuc=new THREE.Group(),orbs=[];
+  for(let i=0;i<8;i++){const p=Math.acos(1-2*(i+.5)/8),h=Math.PI*(1+Math.sqrt(5))*(i+.5),q=mesh(new THREE.SphereGeometry(.3,14,14),mat(i%2?0xc6ff3d:0xf2efe8));
+   q.position.set(.45*Math.sin(p)*Math.cos(h),.45*Math.cos(p),.45*Math.sin(p)*Math.sin(h));nuc.add(q)}
+  g.add(nuc);
+  [0,1,2].forEach(k=>{const pv=new THREE.Group(),ring=mesh(new THREE.TorusGeometry(2.1,.012,6,90),new THREE.MeshBasicMaterial({color:0xf2efe8,transparent:true,opacity:.5})),o=new THREE.Group(),e=mesh(new THREE.SphereGeometry(.14,10,10),mat(0xc6ff3d,{emissive:0x5a7a10}));
+   ring.rotation.x=Math.PI/2;e.position.x=2.1;o.add(e);pv.add(ring,o);pv.rotation.z=k*Math.PI/3;pv.rotation.x=.4;g.add(pv);orbs.push(o)});
+  const sp=spin(g,.2,.15);return{g,tick:(t,it)=>{sp(t,it);orbs.forEach((o,k)=>{o.rotation.y=t*(1.1+k*.35)})}}},
+ crescent(){const g=new THREE.Group(),pts=[],r=Math.PI/180;
+  for(let a=47.6;a<=312.4;a+=6)pts.push(new THREE.Vector2(1.5*Math.cos(a*r),1.5*Math.sin(a*r)));
+  for(let a=292.6;a>=67.4;a-=6)pts.push(new THREE.Vector2(.55+1.2*Math.cos(a*r),1.2*Math.sin(a*r)));
+  const geo=new THREE.ExtrudeGeometry(new THREE.Shape(pts),{depth:.4,bevelEnabled:true,bevelSize:.05,bevelThickness:.05,bevelSegments:2});geo.center();
+  const moon=mesh(geo,mat(0xf2d36b,{metalness:.3}));
+  const st=[];for(let i=0;i<10;i++){const rr=i%2?.16:.4,a=i*Math.PI/5+Math.PI/2;st.push(new THREE.Vector2(rr*Math.cos(a),rr*Math.sin(a)))}
+  const sg=new THREE.ExtrudeGeometry(new THREE.Shape(st),{depth:.15,bevelEnabled:false});sg.center();
+  const star=mesh(sg,mat(0xc6ff3d));star.position.set(1.5,.9,.1);
+  const dots=new THREE.BufferGeometry(),arr=new Float32Array(120*3);for(let i=0;i<arr.length;i++)arr[i]=(Math.random()-.5)*7;dots.setAttribute('position',new THREE.BufferAttribute(arr,3));
+  g.add(moon,star,new THREE.Points(dots,new THREE.PointsMaterial({color:0xf2efe8,size:.04})));
+  const sw=sway(g);return{g,tick:(t,it)=>{sw(t,it);star.rotation.z=t*.8}}},
+ shoebox(){const g=new THREE.Group(),base=mesh(new THREE.BoxGeometry(2.8,1,1.6),mat(0xf2efe8)),lid=new THREE.Group(),lm=mesh(new THREE.BoxGeometry(2.9,.34,1.7),mat(0xc6ff3d));
+  lm.position.set(0,.17,.85);lid.add(lm);lid.position.set(0,.5,-.85);
+  const stripe=mesh(new THREE.BoxGeometry(2.82,.18,1.62),mat(0x0b0b0a));stripe.position.y=-.1;
+  g.add(base,stripe,lid,wire(base,0x0b0b0a,.3));const sp=spin(g,.4,.4);
+  return{g,tick:(t,it)=>{sp(t,it);lid.rotation.x=-.55+Math.sin(t*.9)*.12}}},
+ layers(){const g=new THREE.Group(),cols=[0x2c1f52,0xf2efe8,0xc6ff3d,0x8c897f,0xf2efe8];
+  cols.forEach((c,i)=>{const m=mesh(new THREE.BoxGeometry(2.8-i*.18,1.8-i*.12,.05),mat(c,{transparent:true,opacity:.92}));m.position.z=(i-2)*.55;g.add(m,wire(m,0xf2efe8,.5))});
+  return{g,tick:(t,it)=>{g.rotation.y=Math.sin(t*.5)*.7+it.mx*2;g.rotation.x=-.15+it.my;g.position.y=.55+Math.sin(t*1.1)*.1}}},
+ hexgate(){const g=new THREE.Group(),p=mesh(new THREE.CylinderGeometry(1.1,1.1,1.5,6),mat(0xf2efe8)),ring=new THREE.Group();
+  g.add(p,wire(p,0x0b0b0a,.7));
+  for(let i=0;i<6;i++){const a=i*Math.PI/3,c=mesh(new THREE.BoxGeometry(.28,.28,.28),mat(0xc6ff3d));c.position.set(Math.cos(a)*2.3,0,Math.sin(a)*2.3);ring.add(c)}
+  g.add(ring);const sp=spin(g,.45,.35);return{g,tick:(t,it)=>{sp(t,it);ring.rotation.y=-t*.8}}},
+ gears(){const g=new THREE.Group();
+  const mk=(r,n,c)=>{const gr=new THREE.Group();gr.add(mesh(new THREE.CylinderGeometry(r,r,.4,28).rotateX(Math.PI/2),mat(c)));
+   for(let i=0;i<n;i++){const a=i*Math.PI*2/n,t=mesh(new THREE.BoxGeometry(r*.32,r*.34,.4),mat(c));t.position.set(Math.cos(a)*r*1.12,Math.sin(a)*r*1.12,0);t.rotation.z=a;gr.add(t)}
+   const hub=mesh(new THREE.TorusGeometry(r*.4,.07,8,24),mat(0x0b0b0a));hub.position.z=.21;gr.add(hub);return gr};
+  const a=mk(1.2,12,0xf2efe8),b=mk(.72,7,0xc6ff3d);a.position.x=-.95;b.position.set(1.2,-.35,0);g.add(a,b);
+  const sw=sway(g);return{g,tick:(t,it)=>{sw(t,it);a.rotation.z=t*.5;b.rotation.z=-t*.85}}},
+ vault(){const g=new THREE.Group(),box=mesh(new THREE.BoxGeometry(2.2,2.2,2.2),mat(0x3a3a4c,{metalness:.4})),door=mesh(new THREE.TorusGeometry(.7,.08,10,32),mat(0xc6ff3d)),core=mesh(new THREE.OctahedronGeometry(.45),mat(0xc6ff3d));
+  door.position.z=1.12;core.position.z=1.2;
+  const bolts=[[-.9,.9],[.9,.9],[-.9,-.9],[.9,-.9]].map(([x,y])=>{const b=mesh(new THREE.CylinderGeometry(.08,.08,.1,10).rotateX(Math.PI/2),mat(0xf2efe8));b.position.set(x,y,1.12);return b});
+  g.add(box,wire(box,0xf2efe8,.6),door,core,...bolts);const sp=spin(g,.35,.4);return{g,tick:(t,it)=>{sp(t,it);core.rotation.y=t*1.4;door.rotation.z=t*.3}}},
+ knot(){const g=new THREE.Group(),k=mesh(new THREE.TorusKnotGeometry(1.5,.42,160,16,2,3),new THREE.MeshBasicMaterial({color:0xc6ff3d,wireframe:true,transparent:true,opacity:.75}));g.add(k);g.scale.setScalar(1.2);
+  return{g,tick:(t,it)=>{g.rotation.y=t*.3+it.mx;g.rotation.x=t*.18+scrollY*.0009}}}
+};
+function init3D(){
+ const cvs=$$('.gl3d');if(!cvs.length||!window.THREE)return;
+ try{
+  const W=720,H=500,R=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
+  R.setPixelRatio(1);R.setSize(W,H,false);
+  const items=cvs.map(cv=>{const b=B[cv.dataset.scene];if(!b)return null;
+   cv.width=W;cv.height=H;
+   const S=new THREE.Scene(),C=new THREE.PerspectiveCamera(36,W/H,.1,60);C.position.set(0,0,9);
+   S.add(new THREE.AmbientLight(0xffffff,.8));
+   const d1=new THREE.DirectionalLight(0xffffff,1.4);d1.position.set(3,5,6);S.add(d1);
+   const d2=new THREE.DirectionalLight(0xc6ff3d,.6);d2.position.set(-5,-2,3);S.add(d2);
+   const o=b();S.add(o.g);
+   const it={cv,ctx:cv.getContext('2d'),S,C,o,vis:false,mx:0,my:0,tx:0,ty:0},art=cv.closest('.art');
+   if(art){art.addEventListener('pointermove',e=>{const r=art.getBoundingClientRect();it.tx=(e.clientX-r.left)/r.width-.5;it.ty=(e.clientY-r.top)/r.height-.5},sig);
+    art.addEventListener('pointerleave',()=>{it.tx=it.ty=0},sig)}
+   return it}).filter(Boolean);
+  if(!items.length){R.dispose();return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const it=items.find(i=>i.cv===e.target);if(it)it.vis=e.isIntersecting}));
+  items.forEach(i=>io.observe(i.cv));
+  let raf=0;
+  const loop=t=>{raf=requestAnimationFrame(loop);
+   for(const it of items){if(!it.vis)continue;it.mx+=(it.tx-it.mx)*.08;it.my+=(it.ty-it.my)*.08;
+    it.o.tick(t*.001,it);R.render(it.S,it.C);it.ctx.clearRect(0,0,W,H);it.ctx.drawImage(R.domElement,0,0)}};
+  const vc=()=>{cancelAnimationFrame(raf);if(!document.hidden)raf=requestAnimationFrame(loop)};
+  document.addEventListener('visibilitychange',vc);
+  R.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(raf);root.classList.remove('d3')});
+  root.classList.add('d3');raf=requestAnimationFrame(loop);
+  cleanups.push(()=>{cancelAnimationFrame(raf);io.disconnect();document.removeEventListener('visibilitychange',vc);
+   items.forEach(i=>i.S.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)o.material.dispose()}));R.dispose()});
+ }catch(e){root.classList.remove('d3')}
+}
 function loadThree(){
- if(mob||reduce)return;
+ if(reduce)return;
+ const hero=!mob,cards=innerWidth>=700;
+ if(!hero&&!cards)return;
  const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
- s.onload=()=>{if(window.THREE)initGL()};document.head.appendChild(s);
+ s.onload=()=>{if(!window.THREE)return;if(hero)initGL();if(cards)init3D()};document.head.appendChild(s);
 }
 
 /* ---------- choreography ---------- */
@@ -620,7 +738,7 @@ function start(){
 
  /* manifesto: pinned, scroll-controlled type */
  const mw=$$('.mf-w span'),m=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#manifesto',start:'top top',end:'+=220%',scrub:.6,pin:true,anticipatePin:1}});
- m.from('.mf-h',{scale:1.25,duration:3},0).from('.mf-ring .dr',{strokeDashoffset:1,duration:3},0);
+ m.from('.mf-h',{scale:1.25,duration:3},0).from('.mf-ring .dr',{strokeDashoffset:1,duration:3},0).from('.mf-3d',{scale:.55,opacity:0,duration:2.4},0);
  mw.forEach((w,i)=>{m.from(w,{yPercent:105,duration:.8,ease:'power3.out'},i*.9).from(w,{color:'rgba(242,239,232,0)',duration:.8},i*.9+.5)});
  m.from('.mf-sub',{opacity:0,y:20,duration:.6},2.4);
 
@@ -654,6 +772,8 @@ function start(){
  /* contact: giant type scrubbed per character */
  gsap.from(cl.flat(),{yPercent:120,rotation:6,stagger:.025,ease:'power3.out',scrollTrigger:{trigger:'#contact',start:'top 70%',end:'top 15%',scrub:true}});
  gsap.from('#cta',{scale:.4,rotation:-90,opacity:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'.ct-grid',start:'top 85%',once:true}});
+ gsap.from('.scrib path',{strokeDashoffset:1,duration:1.5,ease:'power2.inOut',scrollTrigger:{trigger:'.big',start:'top 25%',once:true}});
+ gsap.from('.sq path',{strokeDashoffset:1,duration:1.2,delay:1.4,ease:'power2.out'});
  gsap.from('.row',{yPercent:40,opacity:0,stagger:.1,duration:.9,ease:'power3.out',scrollTrigger:{trigger:'.rows',start:'top 92%',once:true}});
 
  /* pointer-only interactions: magnetic buttons, 3D tilt, image distortion, interactive SVG */
